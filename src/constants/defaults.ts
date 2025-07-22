@@ -5,5 +5,6 @@ export default {
             : "http://localhost:9000/",
     nextServerUrl: process.env.__NEXT_PRIVATE_ORIGIN + "/",
     maxImageCount: 3,
-    minPasswordLength: 5
+    minPasswordLength: 5,
+    minNameLength: 2
 };
