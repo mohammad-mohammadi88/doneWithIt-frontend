@@ -1,23 +1,33 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { FC, useEffect, useRef } from "react";
 import NProgress from "nprogress";
-import "@/NProgress.css";
 
-const NavigationProgress: FC = () => {
+const NavigationProgress = () => {
     const pathname = usePathname();
-    const isFirstRender = useRef<boolean>(true);
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
-        !isFirstRender.current
-            ? NProgress.start()
-            : (isFirstRender.current = false);
+        const handlePopState = () => {
+            NProgress.start();
+        };
+
+        window.addEventListener("popstate", handlePopState);
 
         return () => {
-            NProgress.done();
-            isFirstRender.current = true
+            window.removeEventListener("popstate", handlePopState);
         };
+    }, []);
+
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+        } else {
+            NProgress.start();
+        }
+
+        NProgress.done();
     }, [pathname]);
 
     return null;
