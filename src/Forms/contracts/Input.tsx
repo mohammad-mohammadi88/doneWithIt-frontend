@@ -23,12 +23,12 @@ const Input: FC<Props> = ({
             type={inputType}
             name={name}
             id={name}
-            placeholder=''
+            placeholder=' '
             className={clsx(
                 "outline-1 outline-gray-100 border-0 -outline-offset-3",
-                "focus:outline-indigo-600 focus:outline-2 focus:-outline-offset-2",
+                "focus:outline-indigo-600 focus:bg-white focus:outline-2 focus:-outline-offset-2",
                 "text-base text-gray-900 placeholder:text-gray-400 sm:text-sm/6",
-                "mt-2 block w-full rounded-full bg-white placeholder-shown:bg-light-200 focus:bg-white px-3 py-1.5 border-2 peer",
+                "mt-2 block w-full rounded-full bg-white placeholder-shown:bg-light-200 px-3 py-1.5 border-2 peer",
                 className
             )}
             {...attrs}
@@ -36,7 +36,7 @@ const Input: FC<Props> = ({
         <label
             htmlFor={name}
             className={clsx(
-                "block absolute duration-200 cursor-text -top-1 left-3.5  text-sm/6 font-medium text-gray-900",
+                "block absolute duration-200 bg-white cursor-text -top-1 left-3.5  text-sm/6 font-medium text-gray-900",
                 "peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:bg-light-200",
                 "peer-focus:-top-1 peer-focus:text-sm/6 peer-focus:text-gray-900 peer-focus:bg-white"
             )}
