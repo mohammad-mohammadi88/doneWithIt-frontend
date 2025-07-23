@@ -36,7 +36,7 @@ const Input: FC<Props> = ({
         <label
             htmlFor={name}
             className={clsx(
-                "block absolute duration-200 bg-white cursor-text -top-1 left-3.5  text-sm/6 font-medium text-gray-900",
+                "block absolute duration-200 bg-white cursor-text -top-1 left-3.5 text-sm/6 font-medium text-gray-900",
                 "peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:bg-light-200",
                 "peer-focus:-top-1 peer-focus:text-sm/6 peer-focus:text-gray-900 peer-focus:bg-white"
             )}
