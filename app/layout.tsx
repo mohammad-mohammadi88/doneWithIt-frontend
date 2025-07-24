@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 
 import { NavigationProgress } from "@/Components";
+import Navbar from "@/Components/Navbar";
 import "@/globals.css";
 
 const geistSans = Geist({
@@ -31,7 +32,8 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
             >
                 <NavigationProgress />
-                {children}
+                <div className="tab-container">{children}</div>
+                <Navbar />
             </body>
         </html>
     );

@@ -2,7 +2,7 @@ import type { FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 
-import { Link } from "@/Components/AppComponents";
+import { LinkButton } from "@/Components/AppComponents";
 
 const Welcome: FC = () => (
     <div className='overflow-hidden scroll-py-0'>
@@ -30,12 +30,12 @@ const Welcome: FC = () => (
                 "sm:space-x-4 space-y-4 sm:space-y-0"
             )}
         >
-            <Link href={"auth"} className='bg-primary'>
+            <LinkButton href={"auth"} className='bg-primary'>
                 Login
-            </Link>
-            <Link href={"auth"} className='bg-secondary'>
+            </LinkButton>
+            <LinkButton href={"auth"} className='bg-secondary'>
                 Register
-            </Link>
+            </LinkButton>
         </div>
     </div>
 );

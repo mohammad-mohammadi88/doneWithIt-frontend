@@ -11,6 +11,12 @@
   --color-light-900: #101010;
 }
 
+.tab-container > *{
+  padding-bottom: 80px;
+  @media (width >= 64rem) {
+    padding-bottom: 0;
+  }
+}
 .scroll-container {
   overflow-x: auto;
   scrollbar-width: none;

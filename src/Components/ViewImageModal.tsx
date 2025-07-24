@@ -41,19 +41,21 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
         "pointer-events-auto rounded-full not-disabled:cursor-pointer bg-gray-500 h-12 w-12 text-white px-3 py-1 disabled:opacity-50";
     return (
         <Transition.Root show={isOpen} as={Fragment}>
-            <Dialog as='div' className='relative z-50' onClose={() => {}}>
+            <Dialog as='div' aria-label="view image modal" className='relative z-50' onClose={() => {}}>
                 <div className='fixed inset-0 bg-black bg-opacity-80 transition-opacity' />
                 <div className='z-1 hidden md:flex fixed items-center px-5 top-1/2 -translate-y-1/2 w-screen h-12 justify-between'>
                     <button
                         onClick={handlePrev}
                         className={chevronClasses}
                         disabled={currentIndex === 0}
+                        aria-label="prev image"
                     >
                         <ChevronLeftIcon />
                     </button>
                     <button
                         onClick={handleNext}
                         className={chevronClasses}
+                        aria-label="next image"
                         disabled={currentIndex === images.length - 1}
                     >
                         <ChevronRightIcon />
@@ -74,6 +76,7 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
                                 <div
                                     ref={containerRef}
                                     className='flex overflow-x-scroll snap-x snap-mandatory scroll-container scrollbar-hide h-full'
+                                    aria-label="image container"
                                 >
                                     {images.map((url, i) => (
                                         <Image
@@ -93,6 +96,7 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
                                         scrollToIndex(0);
                                     }}
                                     className='absolute cursor-pointer z-20 top-4 right-4 text-white text-2xl'
+                                    aria-label="close view image modals"
                                 >
                                     ✕
                                 </button>

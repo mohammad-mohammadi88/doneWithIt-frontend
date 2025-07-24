@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import type { FC, MouseEvent, ReactNode } from "react";
-import Link from "next/link";
-
-import { Button } from ".";
+import { usePathname, useRouter } from "next/navigation";
 import NProgress from "nprogress";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import clsx from "clsx";
 
 interface Props {
     href: string;
@@ -14,17 +13,23 @@ interface Props {
 
 const AppLink: FC<Props> = ({ children, href, className }) => {
     const router = useRouter();
+    const pathname = usePathname()
     const handleLink = (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
-        NProgress.start();
-        router.push(href);
+        if(pathname !== href){
+            NProgress.start();
+            router.push(href);
+        }
     };
     return (
-        <Button className={className}>
-            <Link className='w-full' onClick={handleLink} href={href}>
-                {children}
-            </Link>
-        </Button>
+        <Link
+            onDragStart={(e) => e.preventDefault()}
+            className={clsx("w-full", className)}
+            href={href}
+            onClick={handleLink}
+        >
+            {children}
+        </Link>
     );
 };
 

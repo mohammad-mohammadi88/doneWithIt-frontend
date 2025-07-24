@@ -41,6 +41,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest": "^30.0.4",
         "jest-environment-jsdom": "^30.0.4",
+        "jsdom-testing-mocks": "^1.13.1",
         "tailwindcss": "^4",
         "ts-jest": "^29.4.0",
         "ts-node": "^10.9.2",
