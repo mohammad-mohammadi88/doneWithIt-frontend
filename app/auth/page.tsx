@@ -1,40 +1,43 @@
 import type { NextPage } from "next";
 
+import SearchListing from "@/Components/SearchListing";
+import { ListingType } from "@/types/listings";
+import { listingsApi } from "@/APIs";
 import { Card } from "@/Components";
 
-const page: NextPage = async () => {
-    const A = () => (
-        <div className="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
-            <Card
-                href='/'
-                imageURL='https://res.cloudinary.com/dnuaorrrl/image/upload/v1752581733/listings/swhemqkw1xyzdtvgqe54.jpg'
-                isSold
-                subTitle='100$'
-                title='red jacket'
-            />
-        </div>
-    );
+const page: NextPage = async ({ searchParams }: any) => {
+    const { q }: { q: string } = (await searchParams) as any;
+
+    const { body, ok } = await listingsApi.getListings();
+    if (!ok) {
+        return (
+            <div className='bg-light-400 min-h-screen pt-8'>
+                <h2 className='text-secondary text-2xl'>{body.error}</h2>
+            </div>
+        );
+    }
+
+    const filterByTitle = ({ title }: ListingType) =>
+        q ? title.toLowerCase().includes(q.toLowerCase().trim()) : true;
+
     return (
-        <div className='bg-light-400 group'>
+        <div className='bg-light-400 min-h-screen pt-8'>
+            <div className='container mx-auto p-4'>
+                <SearchListing />
+            </div>
             <div className='container flex flex-wrap mx-auto'>
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
-                <A />
+                {(body as ListingType[])
+                    .filter(filterByTitle)
+                    .map(({ images, isSold, id, price, title }) => (
+                        <Card
+                            href={"/feed/" + id}
+                            imageURL={images[0].url}
+                            isSold={isSold}
+                            key={id}
+                            subTitle={price + "$"}
+                            title={title}
+                        />
+                    ))}
             </div>
         </div>
     );
