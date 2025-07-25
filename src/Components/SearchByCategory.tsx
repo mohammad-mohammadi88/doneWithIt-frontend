@@ -10,7 +10,7 @@ import {
     ListboxOptions,
 } from "@headlessui/react";
 
-import type { IconType, ServerCategories } from "@/types/categories";
+import type { ServerCategories } from "@/types/categories";
 import CategoryIcon from "./CategoryIcon";
 
 interface Props {
