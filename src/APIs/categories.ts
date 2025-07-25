@@ -1,9 +1,8 @@
-import type { ServerCategories } from "@/types/categories";
-import apiClient from "./client";
+import serverFetcher from "./fetcher";
 
 const endpoint = "categories";
 
-const getCategories = () => apiClient.get<ServerCategories[]>(endpoint);
+const getCategories = () => serverFetcher(endpoint).then(e=>e.json());
 
 export default {
     getCategories,

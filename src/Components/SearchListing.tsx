@@ -1,9 +1,9 @@
 "use client";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState, type FC } from "react";
 
 import { Input } from "./AppComponents";
-import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 const SearchListing: FC = () => {
     const [searchedValue, setSearchedValue] = useState("");
@@ -29,7 +29,7 @@ const SearchListing: FC = () => {
     }, [debouncedValue]);
 
     return (
-        <div>
+        <div className="flex-1">
             <Input
                 id='search'
                 icon={<MagnifyingGlassIcon width={20} />}
