@@ -1,20 +1,66 @@
+import type { ApiErrorResponse, ApiOkResponse } from "apisauce";
+import { useMutation } from "@tanstack/react-query";
+import Lottie from "lottie-react";
 import { Formik } from "formik";
-import type { FC } from "react";
+import { useEffect, type FC } from "react";
 import clsx from "clsx";
 
+import { ErrorMessage } from "@/Components/AppComponents";
+import loading2Data from "@/animations/loading2.json";
 import loginValidation from "../validations/login";
+import { LoginInterface } from "@/types/Forms";
 import { Input, Submit } from "../contracts";
+import Overlay from "@/Components/Overlay";
+import { authApi, tokenApi } from "@/APIs";
+import { useRouter } from "next/navigation";
 
 const initialValues = {
     email: "",
     password: "",
 };
 const LoginForm: FC = () => {
+    const { mutateAsync, isPending, data, isSuccess } = useMutation({
+        mutationKey: ["login"],
+        mutationFn: async ({
+            email,
+            password,
+        }: LoginInterface): Promise<
+            ApiErrorResponse<{ error: string }> | ApiOkResponse<string>
+        > => await authApi.login(email, password),
+    });
+    const router = useRouter();
+
+    const handleSetToken = async () => {
+        if (data?.data && typeof data.data === "string") {
+            const token = data.data;
+            const { ok } = await tokenApi.storeToken(token);
+            if (ok) router.push("/feed");
+        }
+    };
+    useEffect(() => {
+        if (data?.ok) handleSetToken();
+    }, [data?.ok]);
+    const handleSubmit = async (values: LoginInterface) => {
+        await mutateAsync(values);
+    };
     return (
-        <div className='relative h-screen w-screen'>
+        <>
+            <Overlay visible={isPending || typeof data?.data === "string"}>
+                <Lottie
+                    animationData={loading2Data}
+                    className='h-92'
+                    size={10}
+                />
+            </Overlay>
+            {data?.ok === false && !isPending && (
+                <ErrorMessage
+                    className='text-left'
+                    title={data?.data?.error || "unexpected error happend"}
+                />
+            )}
             <Formik
                 initialValues={initialValues}
-                onSubmit={console.log}
+                onSubmit={handleSubmit}
                 validationSchema={loginValidation}
             >
                 {({
@@ -26,9 +72,8 @@ const LoginForm: FC = () => {
                         autoSave='false'
                         onSubmit={handleSubmit}
                         className={clsx(
-                            "sm:-translate-y-1/2 -translate-x-1/2 left-1/2 sm:top-1/2",
-                            "w-full absolute flex flex-col sm:w-120",
-                            "sm:border border-black rounded-2xl p-5 space-y-5"
+                            "w-full flex flex-col sm:w-120",
+                            "sm:border border-black rounded-2xl p-2 sm:p-5 space-y-5"
                         )}
                     >
                         <Input
@@ -49,7 +94,7 @@ const LoginForm: FC = () => {
                     </form>
                 )}
             </Formik>
-        </div>
+        </>
     );
 };
 

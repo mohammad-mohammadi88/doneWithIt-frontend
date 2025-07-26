@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Submit: FC<Props> = ({ title }) => (
-    <Button type='submit' className='bg-secondary mt-3 text-white'>
+    <Button type='submit' className='bg-secondary mt-1 text-white'>
         {title}
     </Button>
 );

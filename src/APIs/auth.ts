@@ -1,13 +1,16 @@
+
+import { AxiosResponse } from "axios"
+
 import type { RegisterInterface } from "@/types/Forms";
 import apiClient from "./client";
 
 const endpoint = "auth/";
 
 const login = (email: string, password: string) =>
-    apiClient.post(endpoint+'login', { email, password });
+    apiClient.post<any>(endpoint+'login', { email, password });
 
 const register = (data: RegisterInterface) =>
-    apiClient.post(endpoint+"register", data);
+    apiClient.post<AxiosResponse>(endpoint+"register", data);
 
 export default {
     login,

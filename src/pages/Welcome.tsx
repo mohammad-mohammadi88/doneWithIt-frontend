@@ -30,10 +30,10 @@ const Welcome: FC = () => (
                 "sm:space-x-4 space-y-4 sm:space-y-0"
             )}
         >
-            <LinkButton href={"auth"} className='bg-primary'>
+            <LinkButton href={"/welcome/auth/login"} className='bg-primary'>
                 Login
             </LinkButton>
-            <LinkButton href={"auth"} className='bg-secondary'>
+            <LinkButton href={"/welcome/auth/register"} className='bg-secondary'>
                 Register
             </LinkButton>
         </div>

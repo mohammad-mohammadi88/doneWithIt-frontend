@@ -19,7 +19,7 @@ const removeToken = async () => {
     };
 };
 const storeToken = async (token: string) => {
-    const res = await fetch("api/storeToken", {
+    const res = await fetch(defaults.nextServerUrl+"api/storeToken", {
         method: "POST",
         body: JSON.stringify({
             token,

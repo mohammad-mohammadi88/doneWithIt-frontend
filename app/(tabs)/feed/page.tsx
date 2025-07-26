@@ -1,9 +1,14 @@
-import type { NextPage } from 'next'
+import type { NextPage } from "next";
 
-const page:NextPage = () => {
-    return (
-        <div>feed</div>
-    )
-}
+import ListingsPage from "@/pages/ListingsPage";
+import { listingsApi } from "@/APIs";
 
-export default page
+
+const page: NextPage = async ({ searchParams }: any) => (
+    <ListingsPage
+        searchParams={searchParams}
+        getListingsRequest={listingsApi.getListings}
+    />
+);
+
+export default page;

@@ -19,7 +19,7 @@ const Navbar: FC = () => (
             Feed
         </NavLink>
 
-        <NavLink href='/auth'>
+        <NavLink href='/add-listing'>
             <div
                 className={clsx(
                     "bg-secondary flex items-center justify-center -translate-y-7 rounded-full w-14 h-14",

@@ -1,9 +1,10 @@
 import type { ListingType } from "@/types/listings";
 import apiClient from "./client";
+import serverFetcher from "./fetcher";
 
 const endpoint = "listing/";
 
-const getListing = (id: string) => apiClient.get<ListingType>(endpoint + id);
+const getListing = (id: string) => serverFetcher(endpoint + id);
 
 const markAsSoldOut = (id: string, setProgress: (progress: number) => void) =>
     apiClient.patch(endpoint + id, {}, {

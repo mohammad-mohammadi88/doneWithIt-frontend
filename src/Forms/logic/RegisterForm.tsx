@@ -12,7 +12,7 @@ const initialValues = {
 };
 const RegisterForm: FC = () => {
     return (
-        <div className='relative h-screen w-screen'>
+        <div className='relative'>
             <Formik
                 initialValues={initialValues}
                 onSubmit={console.log}
@@ -27,9 +27,8 @@ const RegisterForm: FC = () => {
                         autoSave='false'
                         onSubmit={handleSubmit}
                         className={clsx(
-                            "sm:-translate-y-1/2 -translate-x-1/2 left-1/2 sm:top-1/2",
-                            "w-full absolute flex flex-col sm:w-120",
-                            "sm:border border-black rounded-2xl p-5 space-y-5"
+                            "w-full flex flex-col sm:w-120",
+                            "sm:border border-black rounded-2xl p-2 sm:p-5 space-y-5"
                         )}
                     >
                         <Input

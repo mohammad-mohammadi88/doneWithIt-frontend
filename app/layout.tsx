@@ -1,8 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 
-import { NavigationProgress } from "@/Components";
-import Navbar from "@/Components/Navbar";
+import {
+    HistoryTracker,
+    NavigationProgress,
+    QueryProvider,
+} from "@/Components";
 import "@/globals.css";
 
 const geistSans = Geist({
@@ -31,9 +34,9 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden relative`}
             >
+                <HistoryTracker />
                 <NavigationProgress />
-                <div className="tab-container">{children}</div>
-                <Navbar />
+                <QueryProvider>{children}</QueryProvider>
             </body>
         </html>
     );

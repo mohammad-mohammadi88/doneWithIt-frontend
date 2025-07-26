@@ -10,7 +10,7 @@ export async function POST(req: Request) {
             path: "/",
             maxAge: defaults.tokenLife * 24 * 3600,
         });
-        return new Response("the token set successfully! "+token, {
+        return new Response("the token set successfully!", {
             status: 201,
             statusText: "",
         });

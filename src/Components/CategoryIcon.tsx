@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import Icon from "@mdi/react";
 import {
     mdiFloorLamp,
@@ -11,7 +12,7 @@ import {
     mdiApps,
     mdiApplication,
 } from "@mdi/js";
-import type { FC } from "react";
+
 import type { IconType } from "@/types/categories";
 
 const iconMap: Record<IconType, string> = {

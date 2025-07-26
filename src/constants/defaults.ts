@@ -3,9 +3,12 @@ export default {
         process.env.NODE_ENV === "production"
             ? "https://donewithit-backend-qymu.onrender.com/"
             : "http://localhost:9000/",
-    nextServerUrl: process.env.__NEXT_PRIVATE_ORIGIN + "/",
+    nextServerUrl:
+        typeof window !== "undefined"
+            ? window.location.origin + "/"
+            : undefined,
     maxImageCount: 3,
-    tokenLife:2,
+    tokenLife: 2,
     minPasswordLength: 5,
-    minNameLength: 2
+    minNameLength: 2,
 };
