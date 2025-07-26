@@ -11,6 +11,7 @@ import {
 } from "@headlessui/react";
 
 import type { ServerCategories } from "@/types/categories";
+import { queryReplacor } from "@/utilities";
 import CategoryIcon from "./CategoryIcon";
 
 interface Props {
@@ -22,12 +23,6 @@ const SearchByCategory: FC<Props> = ({ categories, selected = "All" }) => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const handleChange = (text: string) => {
-        const newSearchParams = new URLSearchParams(searchParams?.toString());
-        newSearchParams.set("category", text);
-        router.replace(`${pathname}?${newSearchParams.toString()}`);
-    };
-
     const options: ServerCategories[] = [
         {
             backgroundColor: "red",
@@ -38,17 +33,26 @@ const SearchByCategory: FC<Props> = ({ categories, selected = "All" }) => {
         },
         ...categories,
     ];
-    const selectedIcon = options.find(({ name }) => name === selected)?.icon;
+    const selectedIcon =
+        options.find(({ name }) => name === selected)?.icon || "apps";
     return (
         <div className='mx-auto w-full sm:w-52'>
-            <Listbox value={selected || "All"} onChange={handleChange}>
+            <Listbox
+                value={selected || "All"}
+                onChange={queryReplacor({
+                    router,
+                    pathname,
+                    searchParams,
+                    queryName: "category",
+                })}
+            >
                 <ListboxButton
                     className={clsx(
                         "relative flex items-center h-11 w-full rounded-lg bg-gray-500 py-1.5 pr-8 pl-3 text-left text-sm/6 text-white",
                         "focus:not-data-focus:outline-none data-focus:outline-2 data-focus:-outline-offset-2 data-focus:outline-white/15"
                     )}
                 >
-                    <div className="pr-2">
+                    <div className='pr-2'>
                         <CategoryIcon
                             color='white'
                             icon={selectedIcon}

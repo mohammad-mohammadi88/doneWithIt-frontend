@@ -1,21 +1,26 @@
 import type { NextPage } from "next";
+import { lazy, type FC } from "react";
 import clsx from "clsx";
 
-import { Card, SearchByCategory, SearchListing } from "@/Components";
+import { SearchByCategory, SearchListing } from "@/Components";
+import type { ServerCategories } from "@/types/categories";
 import { categoriesApi, listingsApi } from "@/APIs";
 import type { ListingType } from "@/types/listings";
-import { ServerCategories } from "@/types/categories";
-import { FC } from "react";
 
 const ErrorMessage: FC<{ title: string }> = ({ title }) => (
-    <h2 className='text-secondary text-3xl text-center px-3 md:text-5xl'>{title}</h2>
+    <h2 className='text-secondary text-3xl text-center px-3 md:text-5xl'>
+        {title}
+    </h2>
 );
 
 const page: NextPage = async ({ searchParams }: any) => {
     const { q = "", category = "" }: { q: string; category: string } =
         (await searchParams) as any;
 
-    const categories = await categoriesApi.getCategories();
+    const Footer = lazy(() => import("@/Components/Footer"));
+    const Card = lazy(() => import("@/Components/Card"));
+
+    const categories: ServerCategories[] = await categoriesApi.getCategories();
 
     const { body, ok } = await listingsApi.getListings();
     if (!ok) {
@@ -32,15 +37,15 @@ const page: NextPage = async ({ searchParams }: any) => {
                 <ErrorMessage title='There is no data on database!' />
             </div>
         );
+
     const filterByTitle = ({ title }: ListingType) =>
         !q || title.toLowerCase().includes(q.toLowerCase().trim());
 
     const filterByCategory = ({ categoryId }: ListingType) =>
         category.toLowerCase() === "all" ||
         category.toLowerCase() === "" ||
-        (categories as ServerCategories[])
-            .find(({ id }) => id === categoryId)
-            ?.name.toLowerCase() === category.toLowerCase();
+        categories.find(({ id }) => id === categoryId)?.name.toLowerCase() ===
+            category.toLowerCase();
 
     const filteredListings = (body as ListingType[])
         .filter(filterByTitle)
@@ -48,11 +53,11 @@ const page: NextPage = async ({ searchParams }: any) => {
 
     return (
         <div className='bg-light-400 min-h-screen pt-8'>
-            <div className='container mx-auto flex flex-1 flex-col sm:flex-row space-y-5 sm:space-y-0 p-4 sm:space-x-4 sm:items-center'>
+            <aside className='container mx-auto p-4 flex flex-1 flex-col sm:flex-row space-y-5 sm:space-y-0 sm:space-x-4 sm:items-center'>
                 <SearchListing />
                 <SearchByCategory categories={categories} selected={category} />
-            </div>
-            <div
+            </aside>
+            <main
                 className={clsx(
                     "container flex flex-wrap mx-auto",
                     filteredListings.length === 0 &&
@@ -75,7 +80,8 @@ const page: NextPage = async ({ searchParams }: any) => {
                 ) : (
                     <ErrorMessage title='There is no listing with this filters!' />
                 )}
-            </div>
+            </main>
+            <Footer categories={categories} />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { useEffect, useState, type FC } from "react";
 
+import { queryReplacor } from "@/utilities";
 import { Input } from "./AppComponents";
 
 const SearchListing: FC = () => {
@@ -23,13 +24,16 @@ const SearchListing: FC = () => {
     }, [searchedValue]);
 
     useEffect(() => {
-        const newSearchParams = new URLSearchParams(searchParams?.toString());
-        newSearchParams.set("q", debouncedValue);
-        router.replace(`${pathname}?${newSearchParams.toString()}`);
+        queryReplacor({
+            router,
+            pathname,
+            searchParams,
+            queryName: "q",
+        })(debouncedValue);
     }, [debouncedValue]);
 
     return (
-        <div className="flex-1">
+        <div className='flex-1'>
             <Input
                 id='search'
                 icon={<MagnifyingGlassIcon width={20} />}

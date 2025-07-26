@@ -1,4 +1,4 @@
-import type { AddListingType, ListingType } from "@/types/listings";
+import type { AddListingType } from "@/types/listings";
 import { setBody } from "@/utilities";
 import serverFetcher from "./fetcher";
 import apiClient from "./client";
