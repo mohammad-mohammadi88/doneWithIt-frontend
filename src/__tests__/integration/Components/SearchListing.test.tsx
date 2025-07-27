@@ -1,7 +1,10 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { SearchListing } from "@/Components";
+jest.unmock("../../../utilities")
+
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
+import { SearchListing } from "@/Components";
 
 
 describe("SearchListing", () => {
@@ -16,25 +19,35 @@ describe("SearchListing", () => {
     });
 
     it("renders input element", () => {
+        // arrange
         render(<SearchListing />);
+
+        // assert
         const input = screen.getByRole("textbox");
         expect(input).toBeInTheDocument();
     });
 
     it("updates input value when user types",async () => {
+        // arrange
         render(<SearchListing />);
         const input = screen.getByRole("textbox");
 
+        // act
         await userEvent.type(input,"laptop");
+
+        // assert
         expect(input).toHaveValue("laptop");
     });
 
     it("updates the URL with debounced query param", async () => {
+        // arrange
         render(<SearchListing />);
         const input = screen.getByRole("textbox");
 
+        // act
         await userEvent.type(input,"react");
 
+        // assert
         await waitFor(
             () => {
                 expect(replace).toHaveBeenCalledWith("/listings?q=react");

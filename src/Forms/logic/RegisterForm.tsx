@@ -1,9 +1,18 @@
+import { ApiErrorResponse, ApiOkResponse } from "apisauce";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useEffect, type FC } from "react";
+import Lottie from "lottie-react";
 import { Formik } from "formik";
-import type { FC } from "react";
 import clsx from "clsx";
 
+import { ErrorMessage } from "@/Components/AppComponents";
 import registerValidation from "../validations/register";
+import type { RegisterInterface } from "@/types/Forms";
+import loading2Data from "@/animations/loading2.json";
 import { Input, Submit } from "../contracts";
+import Overlay from "@/Components/Overlay";
+import { authApi, tokenApi } from "@/APIs";
 
 const initialValues = {
     name: "",
@@ -11,11 +20,45 @@ const initialValues = {
     password: "",
 };
 const RegisterForm: FC = () => {
+    const { mutateAsync, isPending, data } = useMutation({
+        mutationKey: ["login"],
+        mutationFn: async (
+            value: RegisterInterface
+        ): Promise<
+            ApiErrorResponse<{ error: string }> | ApiOkResponse<string>
+        > => await authApi.register(value),
+    });
+    const router = useRouter();
+
+    const handleSetToken = async () => {
+        if (data?.data && typeof data.data === "string") {
+            const token = data.data;
+            const { ok } = await tokenApi.storeToken(token);
+            if (ok) router.push("/feed");
+        }
+    };
+    useEffect(() => {
+        if (data?.ok) handleSetToken();
+    }, [data?.ok]);
+
     return (
         <div className='relative'>
+            <Overlay visible={isPending || typeof data?.data === "string"}>
+                <Lottie
+                    animationData={loading2Data}
+                    className='h-92'
+                    size={10}
+                />
+            </Overlay>
+            {data?.ok === false && !isPending && (
+                <ErrorMessage
+                    className='text-left'
+                    title={data?.data?.error || "unexpected error happend"}
+                />
+            )}
             <Formik
                 initialValues={initialValues}
-                onSubmit={console.log}
+                onSubmit={async (value) => await mutateAsync(value)}
                 validationSchema={registerValidation}
             >
                 {({

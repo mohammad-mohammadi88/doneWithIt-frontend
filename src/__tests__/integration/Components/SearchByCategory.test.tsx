@@ -1,18 +1,9 @@
-// SearchByCategory.test.tsx
-import { SearchByCategory } from "@/Components";
-import { ServerCategories } from "@/types/categories";
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import { toBeInDom } from "../helpers.test";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-// mock next/navigation
-jest.mock("next/navigation", () => ({
-    useRouter: () => ({
-        replace: jest.fn(),
-    }),
-    usePathname: () => "/products",
-    useSearchParams: () => new URLSearchParams("sort=asc"),
-}));
+import { ServerCategories } from "@/types/categories";
+import { SearchByCategory } from "@/Components";
+import { toBeInDom } from "../helpers.test";
 
 const mockCategories: ServerCategories[] = [
     {
@@ -32,7 +23,6 @@ const mockCategories: ServerCategories[] = [
 ];
 
 describe("SearchByCategory", () => {
-    beforeEach(() => {});
     it("renders correctly with default value", () => {
         // arrange
         render(<SearchByCategory categories={mockCategories} selected='All' />);
@@ -61,11 +51,11 @@ describe("SearchByCategory", () => {
 
         // act
         await userEvent.click(screen.getByRole("button"));
-
+        
         // assert
-        await waitFor(() => {
-            fireEvent.click(screen.getByRole("button"));
-            fireEvent.click(screen.getByText("Books"));
+        await waitFor(async () => {
+            await userEvent.click(screen.getByRole("button"));
+            await userEvent.click(screen.getByText("Books"));
             toBeInDom(screen.getByText("Books"));
         });
     });

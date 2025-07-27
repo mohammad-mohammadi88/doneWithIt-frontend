@@ -1,8 +1,9 @@
 import type { ApiErrorResponse, ApiOkResponse } from "apisauce";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useEffect, type FC } from "react";
 import Lottie from "lottie-react";
 import { Formik } from "formik";
-import { useEffect, type FC } from "react";
 import clsx from "clsx";
 
 import { ErrorMessage } from "@/Components/AppComponents";
@@ -12,14 +13,13 @@ import { LoginInterface } from "@/types/Forms";
 import { Input, Submit } from "../contracts";
 import Overlay from "@/Components/Overlay";
 import { authApi, tokenApi } from "@/APIs";
-import { useRouter } from "next/navigation";
 
 const initialValues = {
     email: "",
     password: "",
 };
 const LoginForm: FC = () => {
-    const { mutateAsync, isPending, data, isSuccess } = useMutation({
+    const { mutateAsync, isPending, data } = useMutation({
         mutationKey: ["login"],
         mutationFn: async ({
             email,
@@ -40,9 +40,7 @@ const LoginForm: FC = () => {
     useEffect(() => {
         if (data?.ok) handleSetToken();
     }, [data?.ok]);
-    const handleSubmit = async (values: LoginInterface) => {
-        await mutateAsync(values);
-    };
+
     return (
         <>
             <Overlay visible={isPending || typeof data?.data === "string"}>
@@ -60,7 +58,7 @@ const LoginForm: FC = () => {
             )}
             <Formik
                 initialValues={initialValues}
-                onSubmit={handleSubmit}
+                onSubmit={async (value) => await mutateAsync(value)}
                 validationSchema={loginValidation}
             >
                 {({

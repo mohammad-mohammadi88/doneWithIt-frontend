@@ -26,7 +26,7 @@ const AppInput: FC<Props> = ({ icon, id, setValue, value }) => (
             value={value}
             onInput={(e: any) => setValue(e.target.value)}
         />
-        <XMarkIcon className="w-6 h-6 absolute right-2  top-1/2 -translate-y-1/2" onClick={() => setValue('')}/>
+        <XMarkIcon aria-label="xIconForCleanUp" className="w-6 h-6 absolute right-2  top-1/2 -translate-y-1/2" onClick={() => setValue('')}/>
     </div>
 );
 

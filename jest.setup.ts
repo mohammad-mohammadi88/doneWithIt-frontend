@@ -4,9 +4,9 @@ import { mockAnimationsApi } from "jsdom-testing-mocks";
 mockAnimationsApi();
 
 global.ResizeObserver = class {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
 };
 
 jest.mock("next/navigation", () => ({
@@ -17,4 +17,15 @@ jest.mock("next/navigation", () => ({
     useSearchParams: jest
         .fn()
         .mockImplementation(() => new URLSearchParams("sort=asc")),
+}));
+
+jest.mock("nprogress", () => ({
+    start: jest.fn(),
+    done: jest.fn(),
+}));
+
+jest.mock("./src/utilities", () => ({
+    ...jest.requireActual("./src/utilities"),
+    hasInternalBack: jest.fn().mockImplementation(() => true),
+    queryReplacor: jest.fn(() => jest.fn()),
 }));

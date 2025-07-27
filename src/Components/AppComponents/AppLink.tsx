@@ -1,6 +1,6 @@
 "use client";
-import type { FC, MouseEvent, ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import type { FC, MouseEvent, ReactNode } from "react";
 import NProgress from "nprogress";
 import Link from "next/link";
 import clsx from "clsx";

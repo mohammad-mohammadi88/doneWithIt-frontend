@@ -1,4 +1,4 @@
-import type { AddListingType } from "@Types/listings";
+import type { AddListingType } from "@/types/listings";
 import { nanoid } from "nanoid/non-secure";
 
 const setBody = ({

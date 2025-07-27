@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
-import { Button } from ".";
-import { Link } from ".";
+
+import { Button, Link } from ".";
 
 interface Props {
     children: ReactNode;

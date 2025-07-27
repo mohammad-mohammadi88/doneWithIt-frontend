@@ -2,9 +2,9 @@ import { lazy, type FC } from "react";
 
 import { SearchByCategory, SearchListing } from "@/Components";
 import type { ServerCategories } from "@/types/categories";
+import { ErrorMessage } from "@/Components/AppComponents";
 import type { ListingType } from "@/types/listings";
 import { categoriesApi } from "@/APIs";
-import { ErrorMessage } from "@/Components/AppComponents";
 
 interface Props {
     searchParams: Promise<{ q: string; category: string }>;
