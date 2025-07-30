@@ -54,7 +54,7 @@ const RegisterForm: FC = () => {
             </Overlay>
             {data?.ok === false && !isPending && (
                 <ErrorMessage
-                    className='text-left'
+                    className='text-left pb-2'
                     title={data?.data?.error || "unexpected error happend"}
                 />
             )}
@@ -77,15 +77,16 @@ const RegisterForm: FC = () => {
                         )}
                     >
                         <Input
-                            label='Username'
                             inputType='text'
+                            label='Username'
                             name='name'
                             onChange={handleChange}
                             value={name}
+                            autoFocus
                         />
                         <Input
-                            label='Email'
                             inputType='email'
+                            label='Email'
                             name='email'
                             onChange={handleChange}
                             value={email}

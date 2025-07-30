@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import type { ApiErrorResponse, ApiOkResponse } from "apisauce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -54,7 +54,7 @@ const LoginForm: FC = () => {
             </Overlay>
             {data?.ok === false && !isPending && (
                 <ErrorMessage
-                    className='text-left'
+                    className='text-left pb-2'
                     title={data?.data?.error || "unexpected error happend"}
                 />
             )}
@@ -77,8 +77,9 @@ const LoginForm: FC = () => {
                         )}
                     >
                         <Input
-                            label='Email'
+                            autoFocus
                             inputType='email'
+                            label='Email'
                             name='email'
                             onChange={handleChange}
                             value={email}

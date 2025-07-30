@@ -1,5 +1,7 @@
-import { UserType } from "@/types/user";
+import type { UserType } from "@/types/user";
 import { jwtDecode } from "jwt-decode";
 
-export default (token: string | undefined): undefined | UserType =>
-    token ? jwtDecode(token) : undefined;
+export default <T extends string | undefined>(
+    token: T
+): T extends string ? UserType : undefined =>
+    token ? jwtDecode(token) : (undefined as any);

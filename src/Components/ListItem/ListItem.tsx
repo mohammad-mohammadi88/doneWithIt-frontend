@@ -1,6 +1,6 @@
 "use client";
 
-import type { ButtonHTMLAttributes, DetailedHTMLProps, FC } from "react";
+import type { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from "react";
 import { mdiChevronRight } from "@mdi/js";
 import Image from "next/image";
 import Icon from "@mdi/react";
@@ -17,7 +17,7 @@ interface Props
     title: string;
     subTitle?: string;
     chevron?:boolean;
-    ImageReplaceComponent?: () => React.JSX.Element;
+    ImageReplaceComponent?: ReactNode;
 }
 
 const Component: FC<Props> = ({
@@ -30,10 +30,10 @@ const Component: FC<Props> = ({
     ...props
 }) => (
     <button
-        className={clsx("flex w-full items-center bg-white", className)}
+        className={clsx("flex w-full items-center bg-white",chevron && "cursor-pointer", className)}
         {...props}
     >
-        {ImageReplaceComponent && <ImageReplaceComponent />}
+        {ImageReplaceComponent && ImageReplaceComponent}
         {image && (
             <Image
                 src={image}
@@ -45,7 +45,7 @@ const Component: FC<Props> = ({
         )}
         <div className='ml-2.5 h-17.5 flex-1 flex items-start justify-center truncate flex-col'>
             <h3
-                className='truncate  text-lg font-semibold capitalize'
+                className='truncate text-lg font-semibold capitalize'
                 title={title}
             >
                 {title}

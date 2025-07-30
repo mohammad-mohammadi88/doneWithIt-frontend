@@ -1,5 +1,5 @@
-import type { FC } from "react";
 import { redirect } from "next/navigation";
+import type { FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -7,8 +7,7 @@ import { ListingMessage, PageHeading, ViewImageComponent } from "@/Components";
 import LocationMapWrapper from "@/Components/LocationMapWrapper";
 import { ErrorMessage } from "@/Components/AppComponents";
 import getUserOnServer from "@/utilities/getUserOnServer";
-import decodeUser from "@/utilities/decodeUser";
-import { capitalize } from "@/utilities";
+import { capitalize,decodeUser } from "@/utilities";
 import listingApi from "@/APIs/listing";
 import userApi from "@/APIs/user";
 

@@ -1,10 +1,11 @@
-import { ErrorMessage } from "formik";
+import { ErrorMessage, FieldInputProps } from "formik";
 import type { FC } from "react";
 import { Field } from "formik";
 import clsx from "clsx";
 
-interface Props {
+interface Props{
     inputType?: string;
+    autoFocus?:boolean;
     label: string;
     name: string;
     className?: string;

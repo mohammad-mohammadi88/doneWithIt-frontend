@@ -1,10 +1,10 @@
-"use client"
-import type { NextPage } from 'next';
+import AccountPage from '@/screens/AccountPage';
+import type { Metadata, NextPage } from 'next';
 
-
-const page:NextPage = () => {
-    return (
-<></>    )
+export const metadata:Metadata = {
+    title: "Account Page"
 }
+
+const page:NextPage = () => <AccountPage />
 
 export default page
