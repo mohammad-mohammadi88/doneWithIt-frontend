@@ -1,7 +1,6 @@
-"use client";
-import LoginPage from '@/pages/LoginPage';
-import type { NextPage } from 'next'
+import LoginPage from "@/screens/LoginPage";
+import type { NextPage } from "next";
 
-const page:NextPage = () => <LoginPage />;
+const page: NextPage = async () => <LoginPage />;
 
-export default page
+export default page;

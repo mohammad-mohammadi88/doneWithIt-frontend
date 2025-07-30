@@ -1,7 +1,6 @@
-"use client"
-import RegisterPage from '@/pages/RegisterPage'
-import type { NextPage } from 'next'
+import RegisterPage from "@/screens/RegisterPage";
+import type { NextPage } from "next";
 
-const page:NextPage = () => <RegisterPage />
+const page: NextPage = async () => <RegisterPage />;
 
-export default page
+export default page;

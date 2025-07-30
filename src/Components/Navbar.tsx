@@ -8,7 +8,7 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 const Navbar: FC = () => (
     <div
         className={clsx(
-            "container fixed flex h-18 cursor-pointer flex-row justify-between bg-light-100 right-1/2 translate-x-1/2 shadow shadow-black",
+            "container fixed z-1001 flex h-18 cursor-pointer flex-row justify-between bg-light-100 right-1/2 translate-x-1/2 shadow shadow-black",
             "bottom-0 py-2 px-2",
             "sm:rounded-2xl",
             "lg:w-auto lg:bottom-auto lg:translate-x-0 lg:top-1/2 lg:-translate-y-1/2 lg:right-8 lg:flex-col lg:px-3 lg:py-6 lg:h-92"

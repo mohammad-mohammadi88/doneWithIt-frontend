@@ -7,7 +7,7 @@ import { PageHeading } from "@/Components";
 const LoginPage: FC = () => (
     <>
         <PageHeading title='Login' />
-        <div className='flex flex-col w-full sm:-translate-y-5 items-center justify-center sm:h-screen pt-15'>
+        <div className='flex flex-col w-full sm:-translate-y-5 items-center justify-center sm:h-screen'>
             <Image
                 className='pb-5 mt-7 sm:mt-0'
                 src={"/icon.png"}

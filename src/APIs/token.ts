@@ -32,8 +32,9 @@ const storeToken = async (token: string) => {
     };
 };
 
-export default {
+const tokenApi = {
     getToken,
     removeToken,
     storeToken,
 };
+export default tokenApi

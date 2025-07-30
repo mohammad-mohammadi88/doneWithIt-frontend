@@ -11,6 +11,9 @@
   --color-light-900: #101010;
 }
 
+.page-heading + *{
+  padding-top: 3.75rem;
+}
 .tab-container > *{
   padding-bottom: 80px;
   @media (width >= 64rem) {

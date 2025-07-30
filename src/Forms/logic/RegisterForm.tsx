@@ -1,3 +1,4 @@
+"use client"
 import { ApiErrorResponse, ApiOkResponse } from "apisauce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -12,7 +13,8 @@ import type { RegisterInterface } from "@/types/Forms";
 import loading2Data from "@/animations/loading2.json";
 import { Input, Submit } from "../contracts";
 import Overlay from "@/Components/Overlay";
-import { authApi, tokenApi } from "@/APIs";
+import tokenApi from "@/APIs/token";
+import authApi from "@/APIs/auth";
 
 const initialValues = {
     name: "",
@@ -21,7 +23,7 @@ const initialValues = {
 };
 const RegisterForm: FC = () => {
     const { mutateAsync, isPending, data } = useMutation({
-        mutationKey: ["login"],
+        mutationKey: ["register"],
         mutationFn: async (
             value: RegisterInterface
         ): Promise<

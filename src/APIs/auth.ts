@@ -10,7 +10,9 @@ const login = (email: string, password: string) =>
 const register = (data: RegisterInterface) =>
     apiClient.post<any>(endpoint+"register", data);
 
-export default {
+
+const authApi = {
     login,
     register
 }
+export default authApi

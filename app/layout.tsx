@@ -1,12 +1,16 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 
+import getUserOnServer from "@/utilities/getUserOnServer";
+import "@/globals.css";
 import {
     HistoryTracker,
     NavigationProgress,
     QueryProvider,
+    UserHandler,
 } from "@/Components";
-import "@/globals.css";
+
+import Provider from "@/Context/Provider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -24,11 +28,12 @@ export const metadata: Metadata = {
     icons: { icon: "/icon.png" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const token = await getUserOnServer();
     return (
         <html lang='en'>
             <body
@@ -36,7 +41,12 @@ export default function RootLayout({
             >
                 <HistoryTracker />
                 <NavigationProgress />
-                <QueryProvider>{children}</QueryProvider>
+                <QueryProvider>
+                    <Provider>
+                        {token && <UserHandler token={token} />}
+                        {children}
+                    </Provider>
+                </QueryProvider>
             </body>
         </html>
     );

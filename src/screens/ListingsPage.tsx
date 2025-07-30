@@ -3,21 +3,19 @@ import { lazy, type FC } from "react";
 import { SearchByCategory, SearchListing } from "@/Components";
 import type { ServerCategories } from "@/types/categories";
 import { ErrorMessage } from "@/Components/AppComponents";
+import type { TypedResponse } from "@/types/globals";
 import type { ListingType } from "@/types/listings";
-import { categoriesApi } from "@/APIs";
+import categoriesApi from "@/APIs/categories";
 
 interface Props {
     searchParams: Promise<{ q: string; category: string }>;
-    getListingsRequest: () => Promise<{
-        body: { error: string } | ListingType[];
-        ok: boolean;
-    }>;
+    getListingsRequest: () => Promise<TypedResponse<ListingType[]>>;
 }
 const ListingsPage: FC<Props> = async ({
     searchParams,
     getListingsRequest,
 }) => {
-    const errorClassName = "text-3xl md:text-5xl text-center"
+    const errorClassName = "text-3xl md:text-5xl text-center";
     const { q = "", category = "" }: { q: string; category: string } =
         (await searchParams) as any;
 
@@ -28,19 +26,20 @@ const ListingsPage: FC<Props> = async ({
 
     const { body, ok } = await getListingsRequest();
     if (!ok) {
-        if (!Array.isArray(body))
-            return (
-                <div className='bg-light-400 min-h-screen flex justify-center items-center pt-8'>
-                    <ErrorMessage className={errorClassName} title={body?.error} />
-                </div>
-            );
+        return (
+            <div className='bg-light-400 min-h-screen flex justify-center items-center pt-8'>
+                <ErrorMessage className={errorClassName} title={body?.error} />
+            </div>
+        );
     }
-    if (!Array.isArray(body)) return;
 
     if (body.length === 0)
         return (
             <div className='bg-light-400 min-h-screen flex justify-center items-center pt-8'>
-                <ErrorMessage className={errorClassName} title='There is no data on database!' />
+                <ErrorMessage
+                    className={errorClassName}
+                    title='There is no data on database!'
+                />
             </div>
         );
 
@@ -67,7 +66,7 @@ const ListingsPage: FC<Props> = async ({
                         selected={category}
                     />
                 </aside>
-                <main className="container flex flex-wrap mx-auto">
+                <main className='container flex flex-wrap mx-auto'>
                     {filteredListings.length > 0 ? (
                         filteredListings.map(
                             ({ images, isSold, id, price, title }) => (
@@ -83,7 +82,10 @@ const ListingsPage: FC<Props> = async ({
                         )
                     ) : (
                         <div className='mt-5 w-full text-center'>
-                            <ErrorMessage className={errorClassName} title='There is no listing with this filters!' />
+                            <ErrorMessage
+                                className={errorClassName}
+                                title='There is no listing with this filters!'
+                            />
                         </div>
                     )}
                 </main>

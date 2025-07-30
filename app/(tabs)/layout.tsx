@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from "react";
 import { redirect } from "next/navigation";
 
-import serverToken from "@/APIs/serverToken";
+import serverToken from "@/server/serverToken";
 import Navbar from "@/Components/Navbar";
 
 interface Props {

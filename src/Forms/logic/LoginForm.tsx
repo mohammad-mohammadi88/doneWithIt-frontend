@@ -1,3 +1,4 @@
+"use client"
 import type { ApiErrorResponse, ApiOkResponse } from "apisauce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -12,7 +13,8 @@ import loginValidation from "../validations/login";
 import { LoginInterface } from "@/types/Forms";
 import { Input, Submit } from "../contracts";
 import Overlay from "@/Components/Overlay";
-import { authApi, tokenApi } from "@/APIs";
+import tokenApi from "@/APIs/token";
+import authApi from "@/APIs/auth";
 
 const initialValues = {
     email: "",

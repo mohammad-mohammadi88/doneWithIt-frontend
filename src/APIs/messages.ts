@@ -14,11 +14,14 @@ const deleteMessage = (messageId: number|string) =>
 const sendMessage = (
     content: string,
     data: { userId: string | number } | { listingId: string | number }
-) => apiClient.post(endpoint, { content, ...data });
+) => apiClient.post<any>(endpoint, { content, ...data });
 
-export default {
+
+const messagesApi = {
     deleteMessage,
     getMessages,
     getMessageWithId,
     sendMessage,
 };
+
+export default messagesApi

@@ -1,8 +1,7 @@
 import type { NextPage } from "next";
 
-import ListingsPage from "@/pages/ListingsPage";
-import { listingsApi } from "@/APIs";
-
+import ListingsPage from "@/screens/ListingsPage";
+import listingsApi from "@/APIs/listings";
 
 const page: NextPage = async ({ searchParams }: any) => (
     <ListingsPage

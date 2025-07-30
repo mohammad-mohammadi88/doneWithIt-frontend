@@ -1,10 +1,11 @@
-import type { AddListingType } from "@/types/listings";
+import type { AddListingType, ListingType } from "@/types/listings";
+import type { TypedResponse } from "@/types/globals";
 import { setBody } from "@/utilities";
 import serverFetcher from "./fetcher";
 import apiClient from "./client";
 
 const endpoint = "listings/";
-const getListings = async (): Promise<{ body: any; ok: boolean }> => {
+const getListings = async (): Promise<TypedResponse<ListingType[]>> => {
     const res = await serverFetcher(endpoint, { next: { revalidate: 60 } });
     const body = await res.json();
     return {
@@ -58,9 +59,10 @@ const deleteListing = async (
     });
 };
 
-export default {
+const listingsApi = {
     deleteListing,
     editListing,
     getListings,
     postListing,
 };
+export default listingsApi;

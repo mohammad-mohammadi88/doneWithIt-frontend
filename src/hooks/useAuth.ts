@@ -4,7 +4,7 @@ import { useContext } from "react";
 const useAuth = () => {
     const res = useContext(User);
 
-    if (!res) return undefined;
+    if (!res) throw new Error("no provider");
 
     return res;
 };

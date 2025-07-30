@@ -1,10 +1,10 @@
 "use client";
 
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { type FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { hasInternalBack } from "@/utilities";
-import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 
 interface Props {
     title: string;
@@ -19,7 +19,7 @@ const PageHeading: FC<Props> = ({ title }) => {
     }, []);
 
     return (
-        <div className='flex fixed top-0 w-screen shadow-lg items-center gap-2 p-4 z-90 '>
+        <div className='flex h-15 fixed top-0 page-heading w-screen shadow-lg bg-white items-center gap-2 p-4 z-90 '>
             {canGoBack && (
                 <button
                     onClick={() => router.back()}

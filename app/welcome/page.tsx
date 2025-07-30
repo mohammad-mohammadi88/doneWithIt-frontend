@@ -1,3 +1,3 @@
-import WelcomePage from "@/pages/Welcome";
+import WelcomePage from "@/screens/Welcome";
 
 export default async () => <WelcomePage />;

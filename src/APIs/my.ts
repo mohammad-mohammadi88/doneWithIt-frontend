@@ -4,6 +4,7 @@ import apiClient from "./client";
 const endpoint = "my";
 const getMyListings = () => apiClient.get<ListingType[]>(endpoint);
 
-export default {
+const myApi = {
     getMyListings,
 };
+export default myApi;
