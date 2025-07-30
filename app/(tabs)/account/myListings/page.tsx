@@ -1,18 +1,18 @@
 import type { Metadata, NextPage } from "next";
 
 import ListingsPage from "@/screens/ListingsPage";
-import listingsApi from "@/APIs/listings";
+import myApi from "@/APIs/my";
 
 export const metadata: Metadata = {
-    title: "Listings Page",
-    description: "View others listings and buy if you want",
+    title: "Your Listings Page",
+    description: "View listings that you added",
 };
 
 const page: NextPage = async ({ searchParams }: any) => (
     <ListingsPage
         searchParams={searchParams}
-        getListingsRequest={listingsApi.getListings}
+        getListingsRequest={myApi.getMyListings}
     />
-);
+);;
 
 export default page;
