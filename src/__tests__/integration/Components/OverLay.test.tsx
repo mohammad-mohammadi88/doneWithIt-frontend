@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Overlay from "@/Components/Overlay";
+import Overlay from "@/Components/client/Overlay";
 
 describe("Overlay", () => {
     it("should not render anything when visible is false", () => {

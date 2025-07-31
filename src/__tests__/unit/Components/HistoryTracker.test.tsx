@@ -1,4 +1,4 @@
-import HistoryTracker from "@/Components/HistoryTracker";
+import HistoryTracker from "@/Components/client/HistoryTracker";
 import { render } from "@testing-library/react";
 import { usePathname } from "next/navigation";
 

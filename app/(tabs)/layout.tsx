@@ -1,8 +1,8 @@
 import type { FC, ReactNode } from "react";
 import { redirect } from "next/navigation";
 
-import serverToken from "@/server/serverToken";
-import Navbar from "@/Components/Navbar";
+import { serverToken } from "@/APIs/server";
+import { Navbar } from "@Client";
 
 interface Props {
     children: ReactNode;

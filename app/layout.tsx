@@ -1,16 +1,15 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from "next";
 
-import getUserOnServer from "@/utilities/getUserOnServer";
+import { serverToken } from "@/APIs/server";
+import Provider from "@/Context/Provider";
 import "@/globals.css";
 import {
     HistoryTracker,
     NavigationProgress,
     QueryProvider,
     UserHandler,
-} from "@/Components";
-
-import Provider from "@/Context/Provider";
+} from "@Client";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -33,7 +32,7 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const token = await getUserOnServer();
+    const token = await serverToken.getSimpleToken();
     return (
         <html lang='en'>
             <body

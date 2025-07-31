@@ -1,3 +1,4 @@
+export { default as LongPressButton } from "./LongPressButton";
 export { default as ErrorMessage } from "./ErrorMessage";
 export { default as LinkButton } from "./LinkButton";
 export { default as Button } from "./AppButton";

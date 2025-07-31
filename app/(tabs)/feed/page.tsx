@@ -1,7 +1,7 @@
 import type { Metadata, NextPage } from "next";
 
 import ListingsPage from "@/screens/ListingsPage";
-import listingsApi from "@/APIs/listings";
+import { serverListings } from "@/APIs/server";
 
 export const metadata: Metadata = {
     title: "Listings Page",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const page: NextPage = async ({ searchParams }: any) => (
     <ListingsPage
         searchParams={searchParams}
-        getListingsRequest={listingsApi.getListings}
+        getListingsRequest={serverListings.getListings}
     />
 );
 

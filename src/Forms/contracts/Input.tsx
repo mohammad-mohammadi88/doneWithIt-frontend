@@ -1,4 +1,4 @@
-import { ErrorMessage, FieldInputProps } from "formik";
+import { ErrorMessage } from "formik";
 import type { FC } from "react";
 import { Field } from "formik";
 import clsx from "clsx";

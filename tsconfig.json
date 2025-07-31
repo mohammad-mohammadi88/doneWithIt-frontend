@@ -19,12 +19,15 @@
             }
         ],
         "paths": {
-            "@/*": ["./src/*", "./app/*", "./public/*", "./src/Styles/*"],
+            "@/*": ["./src/*", "./app/*", "./public/*"],
             "@Tests/*": [
                 "./src/__tests__/*",
                 "./src/__tests__/unit/*",
                 "./src/__tests__/integration/*"
-            ]
+            ],
+            "@Server":["./src/Components/server/index"],
+            "@Client":["./src/Components/client/index"],
+            "@AppComponents":["./src/Components/AppComponents/index"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

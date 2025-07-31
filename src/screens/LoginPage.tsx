@@ -2,7 +2,7 @@ import type { FC } from "react";
 import Image from "next/image";
 
 import LoginForm from "@/Forms/logic/LoginForm";
-import { PageHeading } from "@/Components";
+import { PageHeading } from "@Client";
 
 const LoginPage: FC = () => (
     <>

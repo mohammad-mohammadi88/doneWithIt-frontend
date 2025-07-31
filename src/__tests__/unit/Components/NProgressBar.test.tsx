@@ -1,4 +1,4 @@
-import NavigationProgress from "@/Components/NProgressBar";
+import NavigationProgress from "@/Components/client/NProgressBar";
 import { render } from "@testing-library/react";
 import { usePathname } from "next/navigation";
 import NProgress from "nprogress";

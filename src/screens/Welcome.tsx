@@ -2,7 +2,7 @@ import type { FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 
-import { LinkButton } from "@/Components/AppComponents";
+import { LinkButton } from "@AppComponents";
 
 const Welcome: FC = () => (
     <div className='overflow-hidden scroll-py-0'>

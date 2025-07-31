@@ -1,6 +1,7 @@
-import type { NextPage } from "next";
-import serverToken from "@/server/serverToken";
 import { redirect } from "next/navigation";
+import type { NextPage } from "next";
+
+import { serverToken } from "@/APIs/server";
 
 const page: NextPage = async () => {
     const { ok } = await serverToken.getToken();

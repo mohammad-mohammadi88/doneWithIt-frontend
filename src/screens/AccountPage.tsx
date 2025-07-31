@@ -3,9 +3,8 @@ import { redirect } from "next/navigation";
 import type { FC } from "react";
 import Icon from "@mdi/react";
 
-import serverToken from "@/server/serverToken";
-import ListItem from "@/Components/ListItem";
-import Logout from "@/Components/Logout";
+import { serverToken } from "@/APIs/server";
+import { ListItem, Logout } from "@Client";
 import { decodeUser } from "@/utilities";
 
 interface LinksType {

@@ -1,4 +1,4 @@
-import { Button } from "@/Components/AppComponents";
+import { Button } from "@AppComponents";
 import type { FC } from "react";
 
 interface Props {

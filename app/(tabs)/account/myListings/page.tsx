@@ -1,7 +1,8 @@
 import type { Metadata, NextPage } from "next";
 
 import ListingsPage from "@/screens/ListingsPage";
-import myApi from "@/APIs/my";
+import { serverMy } from "@/APIs/server";
+import { PageHeading } from "@Client";
 
 export const metadata: Metadata = {
     title: "Your Listings Page",
@@ -9,10 +10,15 @@ export const metadata: Metadata = {
 };
 
 const page: NextPage = async ({ searchParams }: any) => (
-    <ListingsPage
-        searchParams={searchParams}
-        getListingsRequest={myApi.getMyListings}
-    />
-);;
+    <>
+        <div className='!pb-15'>
+            <PageHeading title='My Listings' />
+        </div>
+        <ListingsPage
+            searchParams={searchParams}
+            getListingsRequest={serverMy.getMyListings}
+        />
+    </>
+);
 
 export default page;

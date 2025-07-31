@@ -7,14 +7,13 @@ import Lottie from "lottie-react";
 import { Formik } from "formik";
 import clsx from "clsx";
 
-import { ErrorMessage } from "@/Components/AppComponents";
+import { clientAuth, clientToken } from "@/APIs/client";
 import loading2Data from "@/animations/loading2.json";
 import loginValidation from "../validations/login";
 import { LoginInterface } from "@/types/Forms";
+import { ErrorMessage } from "@AppComponents";
 import { Input, Submit } from "../contracts";
-import Overlay from "@/Components/Overlay";
-import tokenApi from "@/APIs/token";
-import authApi from "@/APIs/auth";
+import { Overlay } from "@Client";
 
 const initialValues = {
     email: "",
@@ -28,14 +27,14 @@ const LoginForm: FC = () => {
             password,
         }: LoginInterface): Promise<
             ApiErrorResponse<{ error: string }> | ApiOkResponse<string>
-        > => await authApi.login(email, password),
+        > => await clientAuth.login(email, password),
     });
     const router = useRouter();
 
     const handleSetToken = async () => {
         if (data?.data && typeof data.data === "string") {
             const token = data.data;
-            const { ok } = await tokenApi.storeToken(token);
+            const { ok } = await clientToken.storeToken(token);
             if (ok) router.push("/feed");
         }
     };

@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useRouter } from "next/navigation";
 
-import PageHeading from "@/Components/PageHeading";
+import PageHeading from "@/Components/client/PageHeading";
 import { hasInternalBack } from "@/utilities";
 import userEvent from "@testing-library/user-event";
 

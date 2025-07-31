@@ -2,7 +2,7 @@ import type { FC } from "react";
 import Image from "next/image";
 
 import RegisterForm from "@/Forms/logic/RegisterForm";
-import { PageHeading } from "@/Components";
+import { PageHeading } from "@Client";
 
 const RegisterPage: FC = () => (
     <>

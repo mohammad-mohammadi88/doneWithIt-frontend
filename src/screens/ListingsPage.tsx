@@ -1,11 +1,11 @@
 import { lazy, type FC } from "react";
 
-import { SearchByCategory, SearchListing } from "@/Components";
 import type { ServerCategories } from "@/types/categories";
-import { ErrorMessage } from "@/Components/AppComponents";
+import { SearchByCategory, SearchListing } from "@Client";
 import type { TypedResponse } from "@/types/globals";
 import type { ListingType } from "@/types/listings";
-import categoriesApi from "@/APIs/categories";
+import { serverCategories } from "@/APIs/server";
+import { ErrorMessage } from "@AppComponents";
 
 interface Props {
     searchParams: Promise<{ q: string; category: string }>;
@@ -19,16 +19,20 @@ const ListingsPage: FC<Props> = async ({
     const { q = "", category = "" }: { q: string; category: string } =
         (await searchParams) as any;
 
-    const Footer = lazy(() => import("@/Components/Footer"));
-    const Card = lazy(() => import("@/Components/Card"));
+    const Footer = lazy(() => import("@/Components/server/Footer"));
+    const Card = lazy(() => import("@/Components/server/Card"));
 
-    const categories: ServerCategories[] = await categoriesApi.getCategories();
+    const categories: ServerCategories[] =
+        await serverCategories.getCategories();
 
     const { body, ok } = await getListingsRequest();
     if (!ok) {
         return (
             <div className='bg-light-400 min-h-screen flex justify-center items-center pt-8'>
-                <ErrorMessage className={errorClassName} title={body?.error} />
+                <ErrorMessage
+                    className={errorClassName}
+                    title={body?.error ?? "Could not load listings"}
+                />
             </div>
         );
     }

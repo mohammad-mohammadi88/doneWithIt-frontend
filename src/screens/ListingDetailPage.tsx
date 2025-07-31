@@ -1,15 +1,12 @@
 import { redirect } from "next/navigation";
-import type { FC } from "react";
+import { lazy, type FC } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 
-import { ListingMessage, PageHeading, ViewImageComponent } from "@/Components";
-import LocationMapWrapper from "@/Components/LocationMapWrapper";
-import { ErrorMessage } from "@/Components/AppComponents";
-import getUserOnServer from "@/utilities/getUserOnServer";
-import { capitalize,decodeUser } from "@/utilities";
-import listingApi from "@/APIs/listing";
-import userApi from "@/APIs/user";
+import { LocationMapWrapper, PageHeading, ViewImageComponent } from "@Client";
+import { serverListing, serverToken, serverUser } from "@/APIs/server";
+import { ErrorMessage } from "@AppComponents";
+import { capitalize } from "@/utilities";
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -17,7 +14,10 @@ interface Props {
 
 const ListingDetailPage: FC<Props> = async ({ params }) => {
     const listingId = (await params).id;
-    const { body, ok } = await listingApi.getListing(listingId);
+    const ListingMessage = lazy(
+        () => import("@/Components/client/ListingMessage")
+    );
+    const { body, ok } = await serverListing.getListing(listingId);
     if (!ok)
         return (
             <ErrorMessage
@@ -41,10 +41,9 @@ const ListingDetailPage: FC<Props> = async ({ params }) => {
     } = body;
     if (isSold) redirect("/feed");
 
-    const user = await userApi.getServerUser(userId);
+    const user = await serverUser.getServerUser(userId);
 
-    const token = await getUserOnServer();
-    const me = decodeUser(token);
+    const me = await serverToken.getUserWithToken();
 
     const isMyListing = user.ok && me?.userId === user.body.id;
     return (

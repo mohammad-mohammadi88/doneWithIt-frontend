@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ApiErrorResponse, ApiOkResponse } from "apisauce";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -7,14 +7,13 @@ import Lottie from "lottie-react";
 import { Formik } from "formik";
 import clsx from "clsx";
 
-import { ErrorMessage } from "@/Components/AppComponents";
 import registerValidation from "../validations/register";
+import { clientAuth, clientToken } from "@/APIs/client";
 import type { RegisterInterface } from "@/types/Forms";
 import loading2Data from "@/animations/loading2.json";
+import { ErrorMessage } from "@AppComponents";
 import { Input, Submit } from "../contracts";
-import Overlay from "@/Components/Overlay";
-import tokenApi from "@/APIs/token";
-import authApi from "@/APIs/auth";
+import { Overlay } from "@Client";
 
 const initialValues = {
     name: "",
@@ -28,14 +27,14 @@ const RegisterForm: FC = () => {
             value: RegisterInterface
         ): Promise<
             ApiErrorResponse<{ error: string }> | ApiOkResponse<string>
-        > => await authApi.register(value),
+        > => await clientAuth.register(value),
     });
     const router = useRouter();
 
     const handleSetToken = async () => {
         if (data?.data && typeof data.data === "string") {
             const token = data.data;
-            const { ok } = await tokenApi.storeToken(token);
+            const { ok } = await clientToken.storeToken(token);
             if (ok) router.push("/feed");
         }
     };

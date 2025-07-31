@@ -1,7 +1,7 @@
 import type { Metadata, NextPage } from "next";
 
 import ListingDetailPage from "@/screens/ListingDetailPage";
-import listingApi from "@/APIs/listing";
+import { serverListing } from "@/APIs/server";
 
 interface Props {
     params: Promise<{ id: string }>;
@@ -11,7 +11,7 @@ export const generateMetadata = async ({
     params,
 }: Props): Promise<Metadata> => {
     const listingId = (await params).id;
-    const { body, ok } = await listingApi.getListing(listingId);
+    const { body, ok } = await serverListing.getListing(listingId);
     if (!ok)
         return {
             title: body?.error ?? "Could not load listing info!",

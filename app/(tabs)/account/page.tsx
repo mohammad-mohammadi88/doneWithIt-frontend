@@ -5,6 +5,6 @@ export const metadata:Metadata = {
     title: "Account Page"
 }
 
-const page:NextPage = () => <AccountPage />
+const page:NextPage = async () => <AccountPage />
 
 export default page
