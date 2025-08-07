@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
+import ListingAddPage from "@/screens/ListingAddPage";
+import type { Metadata, NextPage } from "next";
 
-const page:NextPage = () => {
-    return (
-        <div>add listing</div>
-    )
-}
+export const metadata: Metadata = {
+    title: "Add Listing Page",
+};
+const page: NextPage = () => <ListingAddPage />;
 
-export default page
+export default page;

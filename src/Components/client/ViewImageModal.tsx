@@ -2,7 +2,12 @@
 
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/16/solid";
 import { FC, Fragment, useEffect, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import {
+    Dialog,
+    DialogPanel,
+    Transition,
+    TransitionChild,
+} from "@headlessui/react";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -77,14 +82,14 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
     const chevronClasses =
         "pointer-events-auto rounded-full not-disabled:cursor-pointer bg-gray-500 h-12 w-12 text-white px-3 py-1 disabled:opacity-50";
     return (
-        <Transition.Root show={isOpen} as={Fragment}>
+        <Transition show={isOpen} as={Fragment}>
             <Dialog
-                as='div'
-                aria-label='view image modal'
-                className='relative z-50 pt-15'
+                as="div"
+                aria-label="view image modal"
+                className="relative z-50 pt-15"
                 onClose={() => {}}
             >
-                <div className='fixed inset-0 bg-black bg-opacity-80 transition-opacity' />
+                <div className="fixed inset-0 bg-black bg-opacity-80 transition-opacity" />
                 <div
                     className={clsx(
                         "z-1 hidden fixed px-5 w-screen h-12",
@@ -96,35 +101,35 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
                         onClick={handlePrev}
                         className={chevronClasses}
                         disabled={currentIndex === 0}
-                        aria-label='prev image'
+                        aria-label="prev image"
                     >
                         <ChevronLeftIcon />
                     </button>
                     <button
                         onClick={handleNext}
                         className={chevronClasses}
-                        aria-label='next image'
+                        aria-label="next image"
                         disabled={currentIndex === images.length - 1}
                     >
                         <ChevronRightIcon />
                     </button>
                 </div>
-                <div className='fixed bottom-0 left-0 right-0 top-15 overflow-hidden'>
-                    <div className='flex h-full items-end justify-center text-center'>
-                        <Transition.Child
+                <div className="fixed bottom-0 left-0 right-0 top-15 overflow-hidden">
+                    <div className="flex h-full items-end justify-center text-center">
+                        <TransitionChild
                             as={Fragment}
-                            enter='transform transition ease-out duration-300'
-                            enterFrom='translate-y-full'
-                            enterTo='translate-y-0'
-                            leave='transform transition ease-in duration-200'
-                            leaveFrom='translate-y-0'
-                            leaveTo='translate-y-full'
+                            enter="transform transition ease-out duration-300"
+                            enterFrom="translate-y-full"
+                            enterTo="translate-y-0"
+                            leave="transform transition ease-in duration-200"
+                            leaveFrom="translate-y-0"
+                            leaveTo="translate-y-full"
                         >
-                            <Dialog.Panel className='w-full h-full bg-black overflow-hidden'>
+                            <DialogPanel className="w-full h-full bg-black overflow-hidden">
                                 <div
                                     ref={(ref) => setContainerRef(ref)}
-                                    className='flex overflow-x-scroll snap-x snap-mandatory scroll-container scrollbar-hide h-full'
-                                    aria-label='image container'
+                                    className="flex overflow-x-scroll snap-x snap-mandatory scroll-container scrollbar-hide h-full"
+                                    aria-label="image container"
                                 >
                                     {images.map((url, i) => (
                                         <Image
@@ -133,7 +138,7 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
                                             key={i}
                                             src={url}
                                             alt={`image-${i}`}
-                                            className='snap-start w-full object-contain h-full flex-shrink-0'
+                                            className="snap-start w-full object-contain h-full flex-shrink-0"
                                         />
                                     ))}
                                 </div>
@@ -143,17 +148,17 @@ const ViewImageModal: FC<Props> = ({ isOpen, onClose, images }) => {
                                         onClose();
                                         scrollToIndex(0);
                                     }}
-                                    className='absolute cursor-pointer z-20 top-4 right-4 text-white text-2xl'
-                                    aria-label='close view image modals'
+                                    className="absolute cursor-pointer z-20 top-4 right-4 text-white text-2xl"
+                                    aria-label="close view image modals"
                                 >
                                     ✕
                                 </button>
-                            </Dialog.Panel>
-                        </Transition.Child>
+                            </DialogPanel>
+                        </TransitionChild>
                     </div>
                 </div>
             </Dialog>
-        </Transition.Root>
+        </Transition>
     );
 };
 

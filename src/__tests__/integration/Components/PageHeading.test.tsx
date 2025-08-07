@@ -1,9 +1,9 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { useRouter } from "next/navigation";
 
-import PageHeading from "@/Components/client/PageHeading";
 import { hasInternalBack } from "@/utilities";
-import userEvent from "@testing-library/user-event";
+import { PageHeading } from "@Client";
 
 jest.mock("next/navigation", () => ({
     useRouter: jest.fn(),
@@ -36,7 +36,7 @@ describe("PageHeading", () => {
         expect(screen.queryByRole("button")).not.toBeInTheDocument();
     });
 
-    it("should call router.back when back button is clicked",async  () => {
+    it("should call router.back when back button is clicked", async () => {
         // arrange
         (hasInternalBack as jest.Mock).mockImplementation(() => true);
         render(<PageHeading title='Test Page' />);

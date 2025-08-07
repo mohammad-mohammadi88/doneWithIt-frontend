@@ -5,7 +5,7 @@ import { type FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
-import { hasInternalBack } from "@/utilities";
+import { capitalize, hasInternalBack } from "@/utilities";
 
 interface Props {
     title: string;
@@ -31,12 +31,12 @@ const PageHeading: FC<Props> = ({ title, className }) => {
             {canGoBack && (
                 <button
                     onClick={() => router.back()}
-                    className='pr-2 cursor-pointer font-medium'
+                    className="pr-2 cursor-pointer font-medium"
                 >
-                    <ArrowLeftIcon className='w-6 h-6 hover:text-blue-600 text-gray-700' />
+                    <ArrowLeftIcon className="w-6 h-6 hover:text-blue-600 text-gray-700" />
                 </button>
             )}
-            <h1 className='text-lg font-bold'>{title}</h1>
+            <h1 className="text-lg font-bold">{capitalize(title)}</h1>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-export type ImageType = Record<"url", string>;
+export type ImageType = Record<"url" | "public_id", string>;
 
 export interface ListingType {
     id: number;
@@ -7,9 +7,9 @@ export interface ListingType {
     price: number;
     categoryId: number;
     userId: number;
-    latitude?:number;
-    longitude?:number;
-    isSold:boolean;
+    latitude?: number;
+    longitude?: number;
+    isSold: boolean;
     description: string;
 }
 
@@ -17,12 +17,12 @@ export type AddListingType = {
     title: string;
     price: string | number;
     description: string;
-    images: ChangeListingImageType[]
-    latitude?:number;
-    longitude?:number;
-    categoryId: number,
-    setProgress: (progress: number) => void
-}
+    images: File[];
+    latitude?: number;
+    longitude?: number;
+    categoryId: number;
+    setProgress: (progress: number) => void;
+};
 
 export type ListingParamsType = Omit<ListingType, "images"> & {
     images: string;

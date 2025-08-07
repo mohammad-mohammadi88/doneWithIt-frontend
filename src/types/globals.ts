@@ -1,11 +1,8 @@
-import type {
-    ButtonHTMLAttributes,
-    DetailedHTMLProps,
-    ReactNode,
-} from "react";
-export interface UserLocationType{
-    latitude?:number;
-    longitude?:number;
+import type { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+
+export interface UserLocationType {
+    latitude?: number;
+    longitude?: number;
 }
 
 export type Success<T> = { ok: true; body: T };
@@ -19,7 +16,7 @@ export interface ListItemProps
     > {
     image?: string;
     title: string;
-    onLongPress?: () => void
+    onLongPress?: () => void;
     priority?: boolean;
     subTitle?: string;
     chevron?: boolean;

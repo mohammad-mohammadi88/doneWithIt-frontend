@@ -15,7 +15,7 @@ const RecenterButton: FC<Props> = ({ latitude, longitude }) => {
     const map = useMap();
 
     const handleClick = () => {
-        map.setView([latitude, longitude], map.getZoom(), {
+        map.setView([latitude, longitude], 15, {
             animate: true,
         });
     };
@@ -23,9 +23,9 @@ const RecenterButton: FC<Props> = ({ latitude, longitude }) => {
     return (
         <button
             onClick={handleClick}
-            className='h-10 w-10 absolute bottom-2.5 left-2.5 p-2 bg-black/50 border-none rounded-full text-sm cursor-pointer z-400'
+            className="h-10 w-10 absolute bottom-2.5 left-2.5 p-2 bg-black/50 border-none rounded-full text-sm cursor-pointer z-400"
         >
-            <Icon path={mdiTarget} className='z-10' color={"white"} size={1} />
+            <Icon path={mdiTarget} className="z-10" color={"white"} size={1} />
         </button>
     );
 };
@@ -40,16 +40,16 @@ L.Icon.Default.mergeOptions({
 
 const LocationMap: FC<Props> = ({ latitude, longitude }) => {
     return (
-        <div className='h-50 md:h-92 w-full mt-5 relative rounded-lg overflow-hidden'>
+        <div className="h-50 md:h-92 w-full mt-5 relative rounded-lg overflow-hidden">
             <MapContainer
                 center={[latitude, longitude]}
                 zoom={15}
                 scrollWheelZoom={true}
-                className='h-full z-9 w-full'
+                className="h-full z-9 w-full"
             >
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={[latitude, longitude]} />
                 <RecenterButton latitude={latitude} longitude={longitude} />

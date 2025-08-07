@@ -1,4 +1,4 @@
-import AppLink from "@/Components/AppComponents/AppLink";
+import {Link} from "@AppComponents";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { usePathname, useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ beforeEach(() => {
 
 describe("AppLink tests", () => {
     it("should call NProgress.start on click event", async () => {
-        const { getByText } = render(<AppLink href='/feed'>feed link</AppLink>);
+        const { getByText } = render(<Link href='/feed'>feed link</Link>);
         const link = getByText("feed link");
         const NProgressStartSpy = jest.spyOn(nProgress, "start");
 
@@ -30,7 +30,7 @@ describe("AppLink tests", () => {
     });
     it("should not call NProgress.start on click event if pathname and href are same", async () => {
         (usePathname as jest.Mock).mockImplementation(() => "/feed")
-        const { getByText } = render(<AppLink href='/feed'>feed link</AppLink>);
+        const { getByText } = render(<Link href='/feed'>feed link</Link>);
         const link = getByText("feed link");
         const NProgressStartSpy = jest.spyOn(nProgress, "start");
 

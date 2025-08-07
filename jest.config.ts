@@ -1,11 +1,12 @@
-import nextJest from "next/jest";
+import nextJest from "next/jest.js";
+import type { Config } from "jest";
 
 const createJestConfig = nextJest({
     dir: "./",
 });
 
-const customJestConfig = {
-    setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+const customJestConfig: Config = {
+    setupFilesAfterEnv: ["<rootDir>/src/testSetup.js"],
     moduleNameMapper: {
         "^@/(.*)$": "<rootDir>/$1",
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",

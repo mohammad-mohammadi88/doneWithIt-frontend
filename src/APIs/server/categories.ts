@@ -1,11 +1,12 @@
-import serverFetcher from "./fetcher";
+import defaults from "@/constants/defaults";
 
 const endpoint = "categories";
 
-const getCategories = () => serverFetcher(endpoint).then(e=>e.json());
+const getCategories = () =>
+    fetch(defaults.serverUrl + endpoint).then((e) => e.json());
 
 const categoriesApi = {
     getCategories,
 };
 
-export default categoriesApi
+export default categoriesApi;

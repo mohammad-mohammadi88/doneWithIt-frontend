@@ -1,8 +1,9 @@
-import { ViewImageModal } from "@/Components";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
+
 import { toBeInDom, toBeNotInDom } from "@Tests/helpers.test";
+import { ViewImageModal } from "@Client";
 
 // Before Each
 const onClose = jest.fn();

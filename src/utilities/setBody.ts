@@ -1,5 +1,4 @@
 import type { AddListingType } from "@/types/listings";
-import { nanoid } from "nanoid/non-secure";
 
 const setBody = ({
     categoryId,
@@ -9,7 +8,7 @@ const setBody = ({
     title,
     latitude,
     longitude,
-}: Omit<AddListingType, "setProgress">):FormData => {
+}: Omit<AddListingType, "setProgress">): FormData => {
     const data = new FormData();
     data.append("title", title);
     data.append("description", description);
@@ -19,13 +18,7 @@ const setBody = ({
     if (latitude) data.append("latitude", String(latitude));
     if (longitude) data.append("longitude", String(longitude));
 
-    const imageList: any[] = images.map(({ uri, mimeType }) => ({
-        name: nanoid() + ".jpg",
-        type: mimeType || "image/jpeg",
-        uri,
-    }));
-
-    imageList.forEach((image) => {
+    images.forEach((image) => {
         data.append("images", image);
     });
     return data;

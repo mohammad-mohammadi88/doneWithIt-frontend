@@ -9,6 +9,7 @@ export type IconType =
     | "floor-lamp"
     | "headphones"
     | "shoe-heel";
+
 export interface ServerCategories {
     id: number;
     name: string;

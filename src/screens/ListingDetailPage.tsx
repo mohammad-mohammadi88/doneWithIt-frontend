@@ -8,9 +8,7 @@ import { serverListing, serverToken, serverUser } from "@/APIs/server";
 import { ErrorMessage } from "@AppComponents";
 import { capitalize } from "@/utilities";
 
-interface Props {
-    params: Promise<{ id: string }>;
-}
+interface Props { params: Promise<{ id: string }> }
 
 const ListingDetailPage: FC<Props> = async ({ params }) => {
     const listingId = (await params).id;

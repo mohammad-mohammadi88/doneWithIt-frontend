@@ -4,7 +4,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { SearchListing } from "@/Components";
+import { SearchListing } from "@Client";
 
 
 describe("SearchListing", () => {

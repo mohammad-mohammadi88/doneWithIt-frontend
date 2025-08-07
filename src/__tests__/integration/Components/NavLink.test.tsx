@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
+import { usePathname } from "next/navigation";
 
 import { toBeInDom } from "@Tests/helpers.test";
-import { NavLink } from "@/Components";
-import { usePathname } from "next/navigation";
+import { NavLink } from "@Client";
 
 describe("NavLink tests", () => {
     beforeEach(() => {
@@ -11,7 +11,7 @@ describe("NavLink tests", () => {
     it("should have active className", () => {
         // arrange
         render(<NavLink href='/feed'>feed</NavLink>);
-        
+
         // assert
         const link = screen.getByText("feed");
         toBeInDom(link);
@@ -23,7 +23,7 @@ describe("NavLink tests", () => {
         // arrange
         (usePathname as jest.Mock).mockImplementation(() => "auth/account")
         render(<NavLink href='/feed'>feed</NavLink>);
-        
+
         // assert
         const link = screen.getByText("feed");
         expect(link).not.toHaveClass(

@@ -1,15 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { FC, useState } from "react";
 
-import AppInput from "@/Components/AppComponents/AppInput";
 import { toBeInDom } from "@Tests/helpers.test";
-import userEvent from "@testing-library/user-event";
+import { Input } from "@AppComponents";
 
 // Before Each
 const Component: FC = () => {
     const [name, setName] = useState<string>("");
     return (
-        <AppInput icon='label icon' id='name' value={name} setValue={setName} />
+        <Input icon='label icon' id='name' value={name} setValue={setName} />
     );
 };
 beforeEach(() => {

@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { ServerCategories } from "@/types/categories";
-import { SearchByCategory } from "@/Components";
+import { SearchByCategory } from "@Client";
 import { toBeInDom } from "../helpers.test";
 
 const mockCategories: ServerCategories[] = [
