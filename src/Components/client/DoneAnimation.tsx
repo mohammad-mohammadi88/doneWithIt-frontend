@@ -15,7 +15,7 @@ const DoneAnimation: FC<Props> = ({ onAnimationEnd, visible }) => {
             const timer = setTimeout(() => onAnimationEnd(), 1000);
             return () => clearTimeout(timer);
         }
-    }, [visible]);
+    }, [visible, onAnimationEnd]);
     return (
         <Lottie
             autoPlay

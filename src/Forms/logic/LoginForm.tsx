@@ -47,13 +47,13 @@ const LoginForm: FC = () => {
             <Overlay visible={isPending || typeof data?.data === "string"}>
                 <Lottie
                     animationData={loading2Data}
-                    className='h-92'
+                    className="h-92"
                     size={10}
                 />
             </Overlay>
             {data?.ok === false && !isPending && (
                 <ErrorMessage
-                    className='text-left pb-2'
+                    className="text-left pb-2"
                     title={data?.data?.error || "unexpected error happend"}
                 />
             )}
@@ -68,7 +68,7 @@ const LoginForm: FC = () => {
                     handleSubmit,
                 }) => (
                     <form
-                        autoSave='false'
+                        autoSave="false"
                         onSubmit={handleSubmit}
                         className={clsx(
                             "w-full flex flex-col sm:w-120",
@@ -77,20 +77,20 @@ const LoginForm: FC = () => {
                     >
                         <Input
                             autoFocus
-                            inputType='email'
-                            label='Email'
-                            name='email'
+                            inputType="email"
+                            label="Email"
+                            name="email"
                             onChange={handleChange}
                             value={email}
                         />
                         <Input
-                            inputType='password'
-                            label='Password'
-                            name='password'
+                            inputType="password"
+                            label="Password"
+                            name="password"
                             onChange={handleChange}
                             value={password}
                         />
-                        <Submit title='Login' />
+                        <Submit title="Login" />
                     </form>
                 )}
             </Formik>

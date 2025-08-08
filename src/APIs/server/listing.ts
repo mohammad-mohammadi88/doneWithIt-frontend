@@ -18,6 +18,7 @@ const getListing = async (
     };
 };
 
-export default {
+const listing = {
     getListing,
 };
+export default listing;

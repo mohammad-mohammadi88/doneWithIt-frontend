@@ -13,7 +13,7 @@ const getToken = async () => {
                   ok: true,
                   body: token.value,
               };
-    } catch (e) {
+    } catch (_) {
         return {
             ok: false,
             body: "Something went wrong while getting token",

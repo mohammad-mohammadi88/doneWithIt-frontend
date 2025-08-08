@@ -12,6 +12,7 @@ const getMyListings = async (): Promise<TypedResponse<ListingType[]>> => {
     };
 };
 
-export default {
+const my = {
     getMyListings,
 };
+export default my;

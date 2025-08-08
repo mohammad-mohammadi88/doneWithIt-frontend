@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 const fillForm = async (element: Element, text: string) => {
-    text && (await userEvent.type(element, text));
+    if (text) await userEvent.type(element, text);
     await userEvent.click(screen.getByRole("button", { name: /Register/ }));
 };
 interface Validate {

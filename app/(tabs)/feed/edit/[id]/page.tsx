@@ -2,7 +2,6 @@ import type { Metadata, NextPage } from "next";
 
 import { serverListing } from "@/APIs/server";
 import { redirect } from "next/navigation";
-import { ListingChangeInterface } from "@/types/Forms";
 
 import ListingEditPage from "@/screens/ListingEditPage";
 

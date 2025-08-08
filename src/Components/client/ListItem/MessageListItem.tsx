@@ -40,12 +40,12 @@ const MessageListItem: FC<Props> = ({ content, id, name }) => {
                 } else window.alert("Could not send message");
             }
         }
-    }, [isPending, isSuccess]);
+    }, [isPending, isSuccess, data?.data, data?.ok]);
     return (
         <>
             <ListItem
-                className='p-2 duration-100 hover:bg-light-200 active:bg-light-400'
-                image='/user.jpg'
+                className="p-2 duration-100 hover:bg-light-200 active:bg-light-400"
+                image="/user.jpg"
                 onLongPress={() => setDeleteConfirmShow(true)}
                 priority
                 title={name}
@@ -54,15 +54,15 @@ const MessageListItem: FC<Props> = ({ content, id, name }) => {
             />
             <ConfirmDialog
                 isOpen={deleteConfirmShow}
-                title='Delete'
-                description='Are you sure want to delele this message?'
+                title="Delete"
+                description="Are you sure want to delele this message?"
                 onClose={() => setDeleteConfirmShow(false)}
                 onConfirm={async () => await mutateAsync()}
             />
             <Overlay visible={isPending}>
                 <Lottie
                     animationData={loading2Data}
-                    className='h-92'
+                    className="h-92"
                     size={10}
                 />
             </Overlay>

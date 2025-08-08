@@ -4,7 +4,7 @@ import apiClient from "./client";
 
 const endpoint = "listings/";
 
-const postListing = async ({ setProgress, ...info }: AddListingType) =>
+const postListing = async (info: AddListingType) =>
     await apiClient.post<ListingType, { error: string }>(
         endpoint,
         setBody(info),
@@ -16,7 +16,6 @@ const postListing = async ({ setProgress, ...info }: AddListingType) =>
     );
 
 const editListing = async ({
-    setProgress,
     listingId,
     ...info
 }: AddListingType & { listingId: string }) =>
@@ -27,28 +26,17 @@ const editListing = async ({
             headers: {
                 "Content-Type": "multipart/form-data",
             },
-            onUploadProgress: ({ loaded, total }) => {
-                setProgress(Math.min(0.95, loaded / (total ?? 1)));
-            },
         }
     );
 
-const deleteListing = async (
-    listingId: string,
-    setProgress: (progress: number) => void
-) =>
+const deleteListing = async (listingId: string) =>
     await apiClient.delete<ListingType, { error: string }>(
-        endpoint + listingId,
-        undefined,
-        {
-            onUploadProgress: ({ loaded, total }) => {
-                setProgress(Math.min(0.95, loaded / (total ?? 1)));
-            },
-        }
+        endpoint + listingId
     );
 
-export default {
+const listings = {
     deleteListing,
     editListing,
     postListing,
 };
+export default listings;

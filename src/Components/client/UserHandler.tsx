@@ -15,7 +15,7 @@ const UserHandler: FC<Props> = ({ token }) => {
     useLayoutEffect(() => {
         const user: UserType = jwtDecode(token);
         if (user) storeUser(user);
-    }, [token]);
+    }, [token, storeUser]);
     return null;
 };
 

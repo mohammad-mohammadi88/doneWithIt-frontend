@@ -1,15 +1,9 @@
 "use client";
 
-import {
-    Description,
-    Dialog,
-    DialogPanel,
-    DialogTitle,
-    Transition,
-    TransitionChild,
-} from "@headlessui/react";
-import { FC, Fragment } from "react";
-import { Modal } from "../AppComponents";
+import { Description, DialogPanel, DialogTitle } from "@headlessui/react";
+import { FC } from "react";
+
+import { Modal } from "@AppComponents";
 
 interface Props {
     isOpen: boolean;

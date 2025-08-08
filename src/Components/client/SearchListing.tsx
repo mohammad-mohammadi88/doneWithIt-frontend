@@ -30,12 +30,12 @@ const SearchListing: FC = () => {
             searchParams,
             queryName: "q",
         })(debouncedValue);
-    }, [debouncedValue]);
+    }, [debouncedValue, router, pathname, searchParams]);
 
     return (
-        <div className='flex-1'>
+        <div className="flex-1">
             <Input
-                id='search'
+                id="search"
                 icon={<MagnifyingGlassIcon width={20} />}
                 value={searchedValue}
                 setValue={setSearchedValue}

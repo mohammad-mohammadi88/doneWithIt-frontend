@@ -18,17 +18,13 @@ import { clientMessages } from "@/APIs/client";
 import { DoneModal, Overlay } from ".";
 
 interface Props {
-    listingId?: string | number;
-    userId?: string | number;
     visible: boolean;
     setVisible?: Dispatch<SetStateAction<boolean>>;
+    messageIdentify:
+        | { listingId: number | string }
+        | { userId: number | string };
 }
-const SendMessage: FC<Props> = ({ listingId, userId, setVisible, visible }) => {
-    let messageIdentify;
-    if (listingId) messageIdentify = { listingId };
-    else if (userId && !listingId) messageIdentify = { userId };
-    else return null;
-
+const SendMessage: FC<Props> = ({ messageIdentify, setVisible, visible }) => {
     const [successModalShow, setSuccessModalShow] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
     const [error, setError] = useState<string>("");
@@ -39,7 +35,7 @@ const SendMessage: FC<Props> = ({ listingId, userId, setVisible, visible }) => {
             | ApiOkResponse<MessageType>
         > => await clientMessages.sendMessage(message, messageIdentify),
     });
-    
+
     useEffect(() => {
         if (!isPending && isSuccess) {
             if (data?.ok) {
@@ -55,7 +51,7 @@ const SendMessage: FC<Props> = ({ listingId, userId, setVisible, visible }) => {
                 } else setError("Could not send message");
             }
         }
-    }, [isPending, isSuccess]);
+    }, [isPending, isSuccess, data?.data, data?.ok]);
 
     if (!visible) return null;
     return (
@@ -63,22 +59,22 @@ const SendMessage: FC<Props> = ({ listingId, userId, setVisible, visible }) => {
             <Overlay visible={isPending}>
                 <Lottie
                     animationData={loading2Data}
-                    className='h-92'
+                    className="h-92"
                     size={10}
                 />
             </Overlay>
             <DoneModal
                 modalShow={successModalShow}
                 onAnimationEnd={() => {
-                    setSuccessModalShow(false)
-                    setVisible?.(false)
+                    setSuccessModalShow(false);
+                    setVisible?.(false);
                 }}
             />
-            {error && <ErrorMessage className='mt-3' title={error} />}
-            <div className='w-full my-2 py-5 md:pb-0'>
+            {error && <ErrorMessage className="mt-3" title={error} />}
+            <div className="w-full my-2 py-5 md:pb-0">
                 <Input
-                    id='message'
-                    placeholder='Send Message...'
+                    id="message"
+                    placeholder="Send Message..."
                     setValue={setMessage}
                     value={message}
                     required
@@ -101,4 +97,17 @@ const SendMessage: FC<Props> = ({ listingId, userId, setVisible, visible }) => {
     );
 };
 
-export default SendMessage;
+interface WrapperProps {
+    listingId?: string | number;
+    userId?: string | number;
+    visible: boolean;
+    setVisible?: Dispatch<SetStateAction<boolean>>;
+}
+const Wrapper: FC<WrapperProps> = ({ listingId, userId, ...props }) => {
+    let messageIdentify;
+    if (listingId) messageIdentify = { listingId };
+    else if (userId && !listingId) messageIdentify = { userId };
+    else return null;
+    return <SendMessage messageIdentify={messageIdentify} {...props} />;
+};
+export default Wrapper;

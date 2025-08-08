@@ -21,7 +21,6 @@ export type AddListingType = {
     latitude?: number;
     longitude?: number;
     categoryId: number;
-    setProgress: (progress: number) => void;
 };
 
 export type ListingParamsType = Omit<ListingType, "images"> & {

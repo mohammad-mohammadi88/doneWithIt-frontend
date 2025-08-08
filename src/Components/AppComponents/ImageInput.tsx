@@ -55,7 +55,7 @@ const ImageInput: FC<Props> = ({ image, onChangeImage }) => {
                 onClose={onClose}
                 onConfirm={() => {
                     onClose();
-                    image && onChangeImage(image);
+                    if (image) onChangeImage(image);
                 }}
                 title="Delete"
             />

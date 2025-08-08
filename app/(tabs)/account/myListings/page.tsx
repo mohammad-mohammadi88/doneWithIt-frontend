@@ -9,10 +9,16 @@ export const metadata: Metadata = {
     description: "View listings that you added",
 };
 
-const page: NextPage = async ({ searchParams }: any) => (
+interface Props {
+    searchParams: Promise<{
+        q: string;
+        category: string;
+    }>;
+}
+const page: NextPage<Props> = async ({ searchParams }) => (
     <>
-        <div className='!pb-15'>
-            <PageHeading title='My Listings' />
+        <div className="!pb-15">
+            <PageHeading title="My Listings" />
         </div>
         <ListingsPage
             searchParams={searchParams}

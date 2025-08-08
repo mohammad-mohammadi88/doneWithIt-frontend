@@ -8,7 +8,13 @@ export const metadata: Metadata = {
     description: "View others listings and buy if you want",
 };
 
-const page: NextPage = async ({ searchParams }: any) => (
+interface Props {
+    searchParams: Promise<{
+        q: string;
+        category: string;
+    }>;
+}
+const page: NextPage<Props> = async ({ searchParams }) => (
     <ListingsPage
         searchParams={searchParams}
         getListingsRequest={serverListings.getListings}

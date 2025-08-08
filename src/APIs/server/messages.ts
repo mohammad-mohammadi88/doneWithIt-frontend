@@ -27,7 +27,8 @@ const getMessageWithId = async (
     };
 };
 
-export default {
+const messages = {
     getMessageWithId,
     getMessages,
 };
+export default messages;

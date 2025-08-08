@@ -1,4 +1,4 @@
-export default {
+const defaults = {
     serverUrl:
         process.env.NODE_ENV === "production"
             ? "https://donewithit-backend-qymu.onrender.com/"
@@ -12,3 +12,4 @@ export default {
     minPasswordLength: 5,
     minNameLength: 2,
 };
+export default defaults;

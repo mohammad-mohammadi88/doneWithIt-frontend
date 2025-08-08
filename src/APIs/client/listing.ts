@@ -15,6 +15,7 @@ const markAsSoldOut = (id: string, setProgress: (progress: number) => void) =>
         }
     );
 
-export default {
-    markAsSoldOut
-}
+const listing = {
+    markAsSoldOut,
+};
+export default listing;

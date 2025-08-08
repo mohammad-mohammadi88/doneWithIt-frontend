@@ -21,7 +21,7 @@ const ListingEditPage: FC<Props> = ({ listingId, initialValues }) => {
             const image = await urlToObject(url, public_id);
             setImages((c) => [...c, image]);
         });
-    }, []);
+    }, [initialValues.images]);
     return (
         <ChangeListingForm
             initialValues={{

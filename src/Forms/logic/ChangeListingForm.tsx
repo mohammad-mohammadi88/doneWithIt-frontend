@@ -73,7 +73,6 @@ const ChangeListingForm: FC<Props> = ({
                             categoryId,
                             ...value,
                             ...location,
-                            setProgress,
                         });
                         clearProgress();
                         setProgress(Number(ok));
@@ -116,7 +115,7 @@ const ChangeListingForm: FC<Props> = ({
                                 name="price"
                                 className="!w-28"
                                 onChange={(e: InputEvent) => {
-                                    // @ts-ignore
+                                    // @ts-expect-error this will always return a value
                                     const text: string = e.target?.value;
                                     const regex = new RegExp(
                                         /^(?:\d+|\d+\.|\d+\.+\d|\d+\.+\d\d)?$/
