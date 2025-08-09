@@ -93,7 +93,7 @@ const ChangeListingForm: FC<Props> = ({
                             autoSave="false"
                             onSubmit={handleSubmit}
                             className={clsx(
-                                "w-full flex flex-col sm:w-120",
+                                "w-full flex flex-col sm:w-120 !pt-2",
                                 "sm:border border-black rounded-2xl p-2 sm:p-5 space-y-5"
                             )}
                         >
